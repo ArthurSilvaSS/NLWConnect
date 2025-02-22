@@ -17,5 +17,14 @@ public class ExceptionFilter : IExceptionFilter
                 Errors = techLibraryException.GetErrorMessages()
             });
         }
+
+        else
+        {
+            context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            context.Result = new ObjectResult(new ResponseErrorMessagensJson
+            {
+                Errors = { "Internal server error" }
+            });
+        }
     }
 }
